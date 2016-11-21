@@ -1,7 +1,7 @@
 module MassiveRecord
   module ORM
     module Config
-      extend ActiveSupport::Concern 
+      extend ActiveSupport::Concern
 
       included do
         cattr_accessor :connection_configuration, :instance_writer => false
@@ -9,7 +9,6 @@ module MassiveRecord
       end
 
       module ClassMethods
-        extend ActiveSupport::Memoizable
         @@connection = nil
 
         def connection
@@ -33,10 +32,10 @@ module MassiveRecord
 
 
         def table
-          MassiveRecord::Wrapper::Table.new(connection, table_name)
+          @table ||= begin
+            MassiveRecord::Wrapper::Table.new(connection, table_name)
+          end
         end
-        memoize :table
-
 
         def table_exists?
           connection.tables.include?(table_name)

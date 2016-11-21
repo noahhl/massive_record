@@ -5,7 +5,6 @@ require 'active_support/core_ext/class/subclasses'
 require 'active_support/core_ext/module'
 require 'active_support/core_ext/string'
 require 'active_support/core_ext/array'
-require 'active_support/memoizable'
 
 require 'massive_record/orm/schema'
 require 'massive_record/orm/coders'
@@ -37,7 +36,7 @@ module MassiveRecord
   module ORM
     class Base
       include ActiveModel::Conversion
-      
+
       class_attribute :coder, :instance_writer => false
       self.coder = Coders::JSON.new
 
@@ -66,7 +65,7 @@ module MassiveRecord
 
       class_attribute :table_name_prefix, :instance_writer => false
       self.table_name_prefix = ""
-      
+
       class_attribute :table_name_suffix, :instance_writer => false
       self.table_name_suffix = ""
 
@@ -94,7 +93,7 @@ module MassiveRecord
 
 
 
-     
+
       class << self
         def table_name
           @table_name ||= table_name_prefix + table_name_without_pre_and_suffix + table_name_suffix
@@ -133,9 +132,9 @@ module MassiveRecord
           other.is_a? self
         end
 
-        
+
         private
-        
+
         def class_of_descendant(klass)
           if klass.superclass.superclass == Base
             klass
@@ -148,7 +147,7 @@ module MassiveRecord
       #
       # Initialize a new object. Send in attributes which
       # we'll dynamically set up read- and write methods for
-      # and assign to instance variables. How read- and write 
+      # and assign to instance variables. How read- and write
       # methods are defined might change over time when the DSL
       # for describing column families and fields are in place
       # You can call initialize in multiple ways:
@@ -293,7 +292,7 @@ module MassiveRecord
       def update_raw_data_for_column_family(column_family, new_values) # :nodoc:
         @raw_data[column_family] = new_values
       end
-      
+
 
       private
 
