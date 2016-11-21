@@ -19,6 +19,7 @@ Gem::Specification.new do |s|
   s.add_dependency "tzinfo"
   s.add_dependency "thin"
   s.add_dependency "rails-observers"
+  s.add_dependency 'protected_attributes'
 
   s.add_development_dependency "rspec"
 

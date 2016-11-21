@@ -6,7 +6,7 @@ module MassiveRecord
   module ORM
     module AttributeMethods
       extend ActiveSupport::Concern
-      include ActiveModel::AttributeMethods      
+      include ActiveModel::AttributeMethods
       include ActiveModel::MassAssignmentSecurity
 
       module ClassMethods
@@ -33,7 +33,7 @@ module MassiveRecord
       def attributes
         Hash[@attributes.collect { |attr_name, raw_value| [attr_name, read_attribute(attr_name)] }]
       end
-      
+
       def attributes=(new_attributes)
         return unless new_attributes.is_a?(Hash)
 
@@ -55,7 +55,7 @@ module MassiveRecord
         assign_multiparameter_attributes(multiparameter_attributes)
       end
 
-      
+
       def method_missing(method, *args, &block)
         unless self.class.attribute_methods_generated?
           self.class.define_attribute_methods
